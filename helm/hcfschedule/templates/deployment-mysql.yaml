@@ -34,7 +34,7 @@ spec:
                   key: root
                   name: mysql-credentials
             - name: MYSQL_DATABASE
-              value: {{ .Values.deploymentEasyappointment.dbname }}
+              value: {{ .Values.deploymentHCFSchedule.dbname }}
           image: 'mariadb:latest'
           imagePullPolicy: Always
           name: mysql

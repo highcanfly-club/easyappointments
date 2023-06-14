@@ -3,7 +3,7 @@
 # released under the GPLv3 terms
 #########################################################################
 
-deploymentEasyappointment:
+deploymentHCFSchedule:
   image: highcanfly/hcfschedule
   imageTag: latest
   googleSync: 'FALSE'
@@ -13,17 +13,56 @@ deploymentEasyappointment:
   debug: 'FALSE'
   language: english
   baseUrl: 'http://localhost:8888'
-pvcEasyappointments:
+  mailUserAgent: 'HCF!Schedule'
+  mailProtocol: 'smtp'
+  mailType: 'html'
+  mailSmtpDebug: '1'
+  mailSmtpAuth: 'FALSE'
+  mailSmtpHost: 'smtpd'
+  mailSmtpUser: ''
+  mailSmtpPass: ''
+  mailSmtpCrypto: ''
+  mailSmtpPort: 25
+pvcHCFSchedule:
   storage: 1Gi
-ingressEasyappointments:
+ingressHCFSchedule:
   ingressClassName: nginx
   host: hcfschedule.cluster.local
   clusterIssuer: cert-ca-issuer
 serviceEasyappointment:
   port: 8888
 secretMysql:
-  root: cGFzc3dvcmQ=
+  root: password
 replicaCount: 1
+
+smtpd:
+  cloudflareApiKey: ""
+  cloudflareDnsRecords: ""
+  cloudflareZoneId: ""
+  ports:
+  - name: "25"
+    port: 25
+    targetPort: 25
+  postfixHostname: ""
+  replicas: 2
+  smtpd:
+    image:
+      repository: highcanfly/smtp-relay
+      tag: latest
+    resources:
+      limits:
+        cpu: 900m
+        memory: "322122547"
+  smtpdAllowedSenderDomains: ""
+  smtpdDkimPrivateKey: ""
+  smtpdDkimSelector: ""
+  smtpdPostfixHotname: ""
+  smtpdRelayHost: null    # "[smtp.gmail.com]:587"
+  smtpdRelayHostUsername: null # "toto@gmail.com"
+  smtpdRelayHostPassword: null # gmail application pssword
+  smtpdPostfixTlsSecurity: null # encrypt
+
+  type: ClusterIP
 
 image:
   pullPolicy: IfNotPresent

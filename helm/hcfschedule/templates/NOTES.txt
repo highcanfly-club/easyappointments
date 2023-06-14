@@ -1,2 +1,4 @@
-1. Get the application URL by running these commands:
-connect to https://{{ .Values.ingressEasyappointments.host }}
+To finish the HCF!Schedule installation you must visit
+       https://{{ .Values.ingressHCFSchedule.host }}
+
+       There you'll define the administrator login

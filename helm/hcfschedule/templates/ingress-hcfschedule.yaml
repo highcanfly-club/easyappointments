@@ -6,14 +6,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-      cert-manager.io/cluster-issuer: {{ .Values.ingressEasyappointments.clusterIssuer }}
+      cert-manager.io/cluster-issuer: {{ .Values.ingressHCFSchedule.clusterIssuer }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
   name: hcfschedule-ingress
 spec:
-  ingressClassName: {{ .Values.ingressEasyappointments.ingressClassName }}
+  ingressClassName: {{ .Values.ingressHCFSchedule.ingressClassName }}
   rules:
-    - host: {{ .Values.ingressEasyappointments.host }}
+    - host: {{ .Values.ingressHCFSchedule.host }}
       http:
         paths:
           - backend:
@@ -25,5 +25,5 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - {{ .Values.ingressEasyappointments.host }}
+        - {{ .Values.ingressHCFSchedule.host }}
       secretName: hcfschedule-cert

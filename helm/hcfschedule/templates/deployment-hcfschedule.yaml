@@ -30,29 +30,55 @@ spec:
       containers:
         - env:
             - name: BASE_URL
-              value: {{ .Values.deploymentEasyappointment.baseUrl }}
+              value: {{ .Values.deploymentHCFSchedule.baseUrl }}
             - name: LANGUAGE
-              value: {{ .Values.deploymentEasyappointment.language }}
+              value: {{ .Values.deploymentHCFSchedule.language }}
             - name: DEBUG
-              value: {{ squote .Values.deploymentEasyappointment.debug }}
+              value: {{ squote .Values.deploymentHCFSchedule.debug }}
             - name: DB_HOST
-              value: {{ .Values.deploymentEasyappointment.dbhost }}
+              value: {{ .Values.deploymentHCFSchedule.dbhost }}
             - name: DB_NAME
-              value: {{ .Values.deploymentEasyappointment.dbname }}
+              value: {{ .Values.deploymentHCFSchedule.dbname }}
             - name: DB_USERNAME
-              value: {{ .Values.deploymentEasyappointment.dbusername }}
+              value: {{ .Values.deploymentHCFSchedule.dbusername }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: root
                   name: mysql-credentials
+            - name: MAIL_USERAGENT
+              value:  {{ .Values.deploymentHCFSchedule.mailUserAgent }}
+            - name: MAIL_PROTOCOL
+              value:  {{ .Values.deploymentHCFSchedule.mailProtocol }}
+            - name: MAIL_TYPE
+              value:  {{ .Values.deploymentHCFSchedule.mailType }}
+            - name: MAIL_SMTP_DEBUG
+              value:  {{ squote .Values.deploymentHCFSchedule.mailSmtpDebug }}
+            - name: MAIL_SMTP_AUTH
+              value:  {{ squote .Values.deploymentHCFSchedule.mailSmtpAuth }}
+            - name: MAIL_SMTP_HOST
+              value:  {{ .Values.deploymentHCFSchedule.mailSmtpHost }}
+            - name: MAIL_SMTP_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: hcfschedule-credentials
+            - name: MAIL_SMTP_PASS
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: hcfschedule-credentials
+            - name: MAIL_SMTP_CRYPTO
+              value:  {{ squote .Values.deploymentHCFSchedule.mailSmtpCrypto }}
+            - name: MAIL_SMTP_PORT
+              value:  {{ squote .Values.deploymentHCFSchedule.mailSmtpPort }}
             - name: GOOGLE_SYNC_FEATURE
-              value: {{ squote .Values.deploymentEasyappointment.googleSync }}
+              value: {{ squote .Values.deploymentHCFSchedule.googleSync }}
             - name: GOOGLE_PRODUCT_NAME
             - name: GOOGLE_CLIENT_ID
             - name: GOOGLE_CLIENT_SECRET
             - name: GOOGLE_API_KEY
-          image: {{ print .Values.deploymentEasyappointment.image ":" .Values.deploymentEasyappointment.imageTag }}
+          image: {{ print .Values.deploymentHCFSchedule.image ":" .Values.deploymentHCFSchedule.imageTag }}
           imagePullPolicy: IfNotPresent
           name: hcfschedule-server
           ports:
