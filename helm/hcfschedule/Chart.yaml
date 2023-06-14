@@ -3,7 +3,7 @@
 # released under the GPLv3 terms
 #########################################################################
 apiVersion: v2
-name: easyappointments
+name: hcfschedule
 description: A Helm chart for deploying Easyappointments on Kubernetes
 
 # A chart can be either an 'application' or a 'library' chart.

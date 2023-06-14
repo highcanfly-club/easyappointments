@@ -3,6 +3,11 @@
 # © Ronan LE MEILLAT 2023
 # released under the GPLv3 terms
 #########################################################################
+echo "NODEV=$NODEV"
+EXT="-dev"
+if [[ $NODEV -eq "1" ]]; then
+  EXT=""
+fi
 echo "NAMESPACE=$NAMESPACE"
 kubectl create namespace $NAMESPACE
 tar -cv --exclude "node_modules" \
@@ -27,7 +32,7 @@ tar -cv --exclude "node_modules" \
         "args": [
           "-v","info",
           "--cache=true",
-          "--dockerfile=Dockerfile-dev",
+          "--dockerfile=Dockerfile'$EXT'",
           "--context=tar://stdin",
           "--skip-tls-verify",
           "--destination='$EXPECTED_REF'",

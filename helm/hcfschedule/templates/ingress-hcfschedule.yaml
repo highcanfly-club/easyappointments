@@ -9,7 +9,7 @@ metadata:
       cert-manager.io/cluster-issuer: {{ .Values.ingressEasyappointments.clusterIssuer }}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: easyappointments-ingress
+  name: hcfschedule-ingress
 spec:
   ingressClassName: {{ .Values.ingressEasyappointments.ingressClassName }}
   rules:
@@ -18,7 +18,7 @@ spec:
         paths:
           - backend:
               service:
-                name: easyappointments-service
+                name: hcfschedule-service
                 port:
                   number: 8888
             path: /
@@ -26,4 +26,4 @@ spec:
   tls:
     - hosts:
         - {{ .Values.ingressEasyappointments.host }}
-      secretName: easyappointments-cert
+      secretName: hcfschedule-cert

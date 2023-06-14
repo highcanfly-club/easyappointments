@@ -9,14 +9,14 @@ metadata:
     deployment.kubernetes.io/revision: '1'
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: deployment-easyappointments
+  name: deployment-hcfschedule
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: easyappointments-server
+      app: hcfschedule-server
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -25,7 +25,7 @@ spec:
   template:
     metadata:
       labels:
-        app: easyappointments-server
+        app: hcfschedule-server
     spec:
       containers:
         - env:
@@ -54,7 +54,7 @@ spec:
             - name: GOOGLE_API_KEY
           image: {{ print .Values.deploymentEasyappointment.image ":" .Values.deploymentEasyappointment.imageTag }}
           imagePullPolicy: IfNotPresent
-          name: easyappointments-server
+          name: hcfschedule-server
           ports:
             - containerPort: 8888
               protocol: TCP

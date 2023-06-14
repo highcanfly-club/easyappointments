@@ -4,20 +4,20 @@
 #########################################################################
 
 deploymentEasyappointment:
-  image: highcanfly/easyappointments
+  image: highcanfly/hcfschedule
   imageTag: latest
   googleSync: 'FALSE'
   dbusername: root
-  dbname: easyappointments
+  dbname: hcfschedule
   dbhost: mysql
-  debug: 'TRUE'
+  debug: 'FALSE'
   language: english
   baseUrl: 'http://localhost:8888'
 pvcEasyappointments:
   storage: 1Gi
 ingressEasyappointments:
   ingressClassName: nginx
-  host: easyappointments.cluster.local
+  host: hcfschedule.cluster.local
   clusterIssuer: cert-ca-issuer
 serviceEasyappointment:
   port: 8888

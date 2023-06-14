@@ -52,13 +52,13 @@ spec:
           terminationMessagePolicy: File
           volumeMounts:
             - mountPath: /var/lib/mysql
-              name: pvc-easyappointments
+              name: pvc-hcfschedule
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       schedulerName: default-scheduler
       securityContext: {}
       terminationGracePeriodSeconds: 30
       volumes:
-        - name: pvc-easyappointments
+        - name: pvc-hcfschedule
           persistentVolumeClaim:
-            claimName: pvc-easyappointments
+            claimName: pvc-hcfschedule

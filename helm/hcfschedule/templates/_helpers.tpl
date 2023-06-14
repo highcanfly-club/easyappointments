@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "easyappointments.name" -}}
+{{- define "hcfschedule.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "easyappointments.fullname" -}}
+{{- define "hcfschedule.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "easyappointments.chart" -}}
+{{- define "hcfschedule.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "easyappointments.labels" -}}
-helm.sh/chart: {{ include "easyappointments.chart" . }}
-{{ include "easyappointments.selectorLabels" . }}
+{{- define "hcfschedule.labels" -}}
+helm.sh/chart: {{ include "hcfschedule.chart" . }}
+{{ include "hcfschedule.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "easyappointments.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "easyappointments.name" . }}
+{{- define "hcfschedule.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "hcfschedule.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "easyappointments.serviceAccountName" -}}
+{{- define "hcfschedule.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "easyappointments.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "hcfschedule.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

@@ -2,10 +2,10 @@
 # © Ronan LE MEILLAT 2023
 # released under the GPLv3 terms
 #########################################################################
-Namespace='easyappointments'
+Namespace='hcfschedule'
 
-default_registry('ttl.sh/easyappointments-17az23')
-Registry='ttl.sh/easyappointments-17az23'
+default_registry('ttl.sh/hcfschedule-17az23')
+Registry='ttl.sh/hcfschedule-17az23'
 
 
 os.putenv ( 'DOCKER_USERNAME' , 'ociregistry' ) 
@@ -18,17 +18,17 @@ allow_k8s_contexts('kubernetesOCI')
 
 # k8s_yaml('deploy.yaml')
 yaml = helm(
-  'helm/easyappointments',
+  'helm/hcfschedule',
   # The release name, equivalent to helm --name
-  name='easyappointments-1.50',
+  name='hcfschedule-1.50',
   # The namespace to install in, equivalent to helm --namespace
-  namespace='easyappointments',
+  namespace='hcfschedule',
   # The values file to substitute into the chart.
   values=['./_values.yaml'],
   )
 k8s_yaml(yaml)
 
-custom_build('highcanfly/easyappointments','./kaniko-build.sh',[
+custom_build('highcanfly/hcfschedule','./kaniko-build.sh',[
   './entrypoint.sh','./application','./assets'
 ],skips_local_docker=True, 
   live_update=[

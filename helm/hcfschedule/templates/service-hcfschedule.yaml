@@ -8,14 +8,14 @@ metadata:
   annotations: {}
   labels:
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
-  name: easyappointments-service
+  name: hcfschedule-service
 spec:
   ports:
-    - name: easyappointments-server
+    - name: hcfschedule-server
       port: {{ .Values.serviceEasyappointment.port }}
       protocol: TCP
       targetPort: {{ .Values.serviceEasyappointment.port }}
   selector:
-    app: easyappointments-server
+    app: hcfschedule-server
   sessionAffinity: None
   type: ClusterIP
